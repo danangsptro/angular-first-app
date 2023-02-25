@@ -1,0 +1,136 @@
+<nav class="navbar navbar-expand-lg bg-dark py-3">
+    <div class="container-fluid">
+        <a class="navbar-brand text-light" href="#">Employee List</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="d-flex">
+            <button class="btn btn-success" type="button" class="btn btn-primary" data-bs-toggle="modal"
+                data-bs-target="#exampleModal" (click)="add()">Add Employee</button>&nbsp;
+            <!-- <button class="btn btn-warning" routerlink="/login">Logout</button> -->
+            <button routerLink="/login" class="btn btn-warning">Logout</button>
+
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    <!-- Table -->
+    <div class="text-center mt-4">
+        <h2>List Employee</h2>
+    </div>
+    <table class="table table-striped mt-4">
+        <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Username</th>
+                <th scope="col">First Name</th>
+                <th scope="col">Last Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Birth Date</th>
+                <th scope="col">Basic Salary</th>
+                <th scope="col">Status</th>
+                <th scope="col">Group</th>
+                <th scope="col">Descrption</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let data of allEmployee">
+                <td>{{data.id}}</td>
+                <td>{{data.username}}</td>
+                <td>{{data.firstName}}</td>
+                <td>{{data.lastName}}</td>
+                <td>{{data.email}}</td>
+                <td>{{data.birthDate}}</td>
+                <td>{{data.BasicSalary}}</td>
+                <td>{{data.status}}</td>
+                <td>{{data.group}}</td>
+                <td>{{data.description}}</td>
+                <td>
+                    <button class="btn btn-info btn-sm" (click)="edit(data)" data-bs-toggle="modal"
+                    data-bs-target="#exampleModal">Detail</button>&nbsp;
+                    <button class="btn btn-warning btn-sm" (click)="edit(data)" data-bs-toggle="modal"
+                        data-bs-target="#exampleModal">Edit</button>&nbsp;
+                    <button class="btn btn-danger btn-sm" (click)="deleteEmployeee(data)">Delete</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Employee Management</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="formValue">
+                    <div class="mb-3">
+                        <label class="form-label">Username</label>
+                        <input type="text" class="form-control" formControlName="username">
+                        <small *ngIf="formValue.get('username')?.invalid && formValue.get('username')?.touched"
+                            class="text-danger">Username Is Required</small>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">First Name</label>
+                        <input type="text" class="form-control" formControlName="firstName">
+                        <small *ngIf="formValue.get('firstName')?.invalid && formValue.get('firstName')?.touched"
+                            class="text-danger">firstName Is Required</small>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Last Name</label>
+                        <input type="text" class="form-control" formControlName="lastName">
+                        <small *ngIf="formValue.get('lastName')?.invalid && formValue.get('lastName')?.touched"
+                            class="text-danger">lastName Is Required</small>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Email</label>
+                        <input type="email" class="form-control" formControlName="email">
+                        <small *ngIf="formValue.get('email')?.invalid && formValue.get('email')?.touched"
+                            class="text-danger">email Is Required</small>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Birthdate</label>
+                        <input type="date" class="form-control" formControlName="birthDate">
+                        <small *ngIf="formValue.get('birthDate')?.invalid && formValue.get('birthDate')?.touched"
+                            class="text-danger">birthDate Is Required</small>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Basic Salary</label>
+                        <input type="number" class="form-control" formControlName="BasicSalary">
+                        <small *ngIf="formValue.get('BasicSalary')?.invalid && formValue.get('BasicSalary')?.touched"
+                            class="text-danger">basicSalary Is Required</small>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Status</label>
+                        <input type="text" class="form-control" formControlName="status">
+                        <small *ngIf="formValue.get('status')?.invalid && formValue.get('status')?.touched"
+                            class="text-danger">status Is Required</small>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Group</label>
+                        <input type="text" class="form-control" formControlName="group">
+                        <small *ngIf="formValue.get('group')?.invalid && formValue.get('group')?.touched"
+                            class="text-danger">group Is Required</small>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Description</label>
+                        <input type="text" class="form-control" formControlName="description">
+                        <small *ngIf="formValue.get('description')?.invalid && formValue.get('description')?.touched"
+                            class="text-danger">description Is Required</small>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" *ngIf="showAdd" class="btn btn-success" (click)="addEmployee()">Add</button>
+                <button type="button" *ngIf="showUpdate" class="btn btn-warning" (click)="update()">Update</button>
+            </div>
+        </div>
+    </div>
+</div>

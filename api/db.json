@@ -1,0 +1,29 @@
+{
+  "posts": [
+    {
+      "username": "test",
+      "firstName": "te",
+      "lastName": "tef",
+      "email": "efe@gmail.com",
+      "birthDate": "2023-02-23",
+      "BasicSalary": 73878,
+      "status": "hbehbh",
+      "group": "uyuyu",
+      "description": "uuhu",
+      "id": 1
+    }
+  ],
+  "signup": [
+    {
+      "name": "danang",
+      "email": "danang@gmail.com",
+      "mobile": 81283134032,
+      "password": "12345678",
+      "id": 1
+    }
+  ],
+  "comments": [],
+  "profile": {
+    "name": "typicode"
+  }
+}
